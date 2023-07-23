@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,7 @@ public class ProdutoModel implements Serializable {
 	@Column(name = "PRECO")
 	private BigDecimal preco;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "TB_PRODUTO_CATEGORIA_PRODUTO", 
 		joinColumns = @JoinColumn(name = "ID_PRODUTO"), 

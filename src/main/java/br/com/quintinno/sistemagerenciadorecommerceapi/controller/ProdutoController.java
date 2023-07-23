@@ -33,18 +33,18 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/{codigoProduto}")
-	public ProdutoModel searchOne(@PathVariable("codigoCategoriaProduto") Long codigoCategoriaProduto) {
+	public ProdutoModel searchOne(@PathVariable("codigoProduto") Long codigoCategoriaProduto) {
 		return this.produtoService.searchOne(codigoCategoriaProduto);
 	}
 	
 	@PutMapping("/{codigoProduto}")
-	public ProdutoModel updateOne(@RequestBody ProdutoModel produtoModel, @PathVariable("codigoCategoriaProduto") Long codigoProduto) {
+	public ProdutoModel updateOne(@RequestBody ProdutoModel produtoModel, @PathVariable("codigoProduto") Long codigoProduto) {
 			produtoModel.setCodigo(codigoProduto);
 		return this.produtoService.updateOne(produtoModel);
 	}
 	
 	@DeleteMapping("/{codigoProduto}")
-	public void removeOne(@PathVariable("codigoCategoriaProduto")  Long codigoCategoriaProduto) {
+	public void removeOne(@PathVariable("codigoProduto")  Long codigoCategoriaProduto) {
 		this.produtoService.removeOne(codigoCategoriaProduto);
 	}
 

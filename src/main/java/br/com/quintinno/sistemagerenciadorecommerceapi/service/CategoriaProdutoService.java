@@ -1,6 +1,7 @@
 package br.com.quintinno.sistemagerenciadorecommerceapi.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,8 @@ public class CategoriaProdutoService {
 	}
 	
 	public CategoriaProdutoModel searchOne(Long codigoCategoriaProduto) {
-		return this.categoriaProdutoRepository.findById(codigoCategoriaProduto).orElseThrow();
+		return this.categoriaProdutoRepository.findById(codigoCategoriaProduto).orElseThrow( () -> 
+			new NoSuchElementException("Categoria Não Encontrada!"));
 	}
 	
 	public CategoriaProdutoModel updateOne(CategoriaProdutoModel categoriaProdutoModel) {
