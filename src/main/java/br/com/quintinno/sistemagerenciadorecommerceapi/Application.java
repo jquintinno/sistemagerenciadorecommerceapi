@@ -8,7 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.CategoriaProdutoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.CidadeModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.EstadoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ProdutoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.repository.CidadeRepository;
+import br.com.quintinno.sistemagerenciadorecommerceapi.repository.EstadoRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.CategoriaProdutoService;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.ProdutoService;
 
@@ -20,6 +24,12 @@ public class Application implements CommandLineRunner {
 	
 	@Autowired
 	private ProdutoService produtoService;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -51,6 +61,18 @@ public class Application implements CommandLineRunner {
 			this.produtoService.createOne(produtoModel1);
 			this.produtoService.createOne(produtoModel2);
 			this.produtoService.createOne(produtoModel3);
+			
+			EstadoModel estadoModel1 = new EstadoModel("Distrito Federal", "DF");
+			
+			CidadeModel cidadeModel1 = new CidadeModel("Ceilândia", estadoModel1);
+			CidadeModel cidadeModel2 = new CidadeModel("Samambaia", estadoModel1);
+			CidadeModel cidadeModel3 = new CidadeModel("Plano Piloto", estadoModel1);
+			
+				estadoModel1.getCidadeModelList().add(cidadeModel1);
+				estadoModel1.getCidadeModelList().add(cidadeModel2);
+				estadoModel1.getCidadeModelList().add(cidadeModel3);
+			
+				this.estadoRepository.save(estadoModel1);
 			
 	}
 

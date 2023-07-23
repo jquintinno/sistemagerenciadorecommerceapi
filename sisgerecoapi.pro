@@ -19,6 +19,9 @@
    		- SISGERECO22072023212622
    			- Feature: Implementar mapeamento Gerenciador de Produtos (FUNGERPRO)
    			
+   		- SISGERECO23072023122458
+   			- Feature: Implementar mapeamento Gerenciador de Pessoas (FUNGERPES)
+   			
    	--- Tabelas
    	
 	   	create table tb_categoria_produto (
@@ -40,5 +43,20 @@
 	        id_produto bigint not null,
 	        primary key (id_categoria_produto, id_produto)
 	    ) engine=InnoDB;
+	    
+		create table tb_estado (
+	        codigo bigint not null auto_increment,
+	        nome varchar(255),
+	        primary key (codigo)
+	    ) engine=InnoDB;
+	    
+	    create table tb_cidade (
+	        codigo bigint not null auto_increment,
+	        id_estado bigint,
+	        nome varchar(255),
+	        primary key (codigo)
+	    ) engine=InnoDB;
+	    
+	    
 	    
 	    
