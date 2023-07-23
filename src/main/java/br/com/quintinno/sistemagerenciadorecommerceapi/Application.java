@@ -11,7 +11,6 @@ import br.com.quintinno.sistemagerenciadorecommerceapi.model.CategoriaProdutoMod
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.CidadeModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.EstadoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ProdutoModel;
-import br.com.quintinno.sistemagerenciadorecommerceapi.repository.CidadeRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.EstadoRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.CategoriaProdutoService;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.ProdutoService;
@@ -27,9 +26,6 @@ public class Application implements CommandLineRunner {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
-	
-	@Autowired
-	private CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -63,16 +59,25 @@ public class Application implements CommandLineRunner {
 			this.produtoService.createOne(produtoModel3);
 			
 			EstadoModel estadoModel1 = new EstadoModel("Distrito Federal", "DF");
+			EstadoModel estadoModel2 = new EstadoModel("Goias", "GO");
 			
 			CidadeModel cidadeModel1 = new CidadeModel("Ceilândia", estadoModel1);
 			CidadeModel cidadeModel2 = new CidadeModel("Samambaia", estadoModel1);
 			CidadeModel cidadeModel3 = new CidadeModel("Plano Piloto", estadoModel1);
+			CidadeModel cidadeModel4 = new CidadeModel("Goiânia", estadoModel2);
+			CidadeModel cidadeModel5 = new CidadeModel("Aparecida de Goiânia", estadoModel2);
+			CidadeModel cidadeModel6 = new CidadeModel("Anápolis", estadoModel2);
 			
 				estadoModel1.getCidadeModelList().add(cidadeModel1);
 				estadoModel1.getCidadeModelList().add(cidadeModel2);
 				estadoModel1.getCidadeModelList().add(cidadeModel3);
+				
+				estadoModel2.getCidadeModelList().add(cidadeModel4);
+				estadoModel2.getCidadeModelList().add(cidadeModel5);
+				estadoModel2.getCidadeModelList().add(cidadeModel6);
 			
 				this.estadoRepository.save(estadoModel1);
+				this.estadoRepository.save(estadoModel2);
 			
 	}
 
