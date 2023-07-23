@@ -4,6 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -38,6 +40,7 @@ public class ItemPedidoModel implements Serializable {
 		this.preco = preco;
 	}
 	
+	@JsonBackReference
 	// --
 	public PedidoModel getPedidoModel() {
 		return this.codigo.getPedidoModel();

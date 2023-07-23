@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,13 +34,16 @@ public class PedidoModel implements Serializable {
 	@Column(name = "CODIGO")
 	private Long codigo;
 	
-	@Column(name = "NOME")
+	@JsonFormat(pattern = "dd/mm/yyyy HH:mm:ss")
+	@Column(name = "DATA_HORA")
 	private LocalDateTime dataHora;
 	
+	@JsonManagedReference
 	@OneToOne(mappedBy = "pedidoModel", cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_PAGAMENTO")
 	private PagamentoModel pagamentoModel;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "ID_CLIENTE")
 	private ClienteModel clienteModel;
@@ -45,6 +52,7 @@ public class PedidoModel implements Serializable {
 	@JoinColumn(name = "ID_ENDENRECO")
 	private EnderecoModel enderecoEntrega;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "codigo.pedidoModel")
 	private Set<ItemPedidoModel> itemPedidoModelList = new HashSet<>();
 	

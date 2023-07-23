@@ -3,6 +3,8 @@ package br.com.quintinno.sistemagerenciadorecommerceapi.model;
 import java.io.Serial;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.quintinno.sistemagerenciadorecommerceapi.enumeration.TipoSituacaoPagamentoEnumeration;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +30,7 @@ public abstract class PagamentoModel implements Serializable {
 	@Column(name = "CODIGO")
 	private Long codigo;
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "ID_PEDIDO")
 	@MapsId // Garantir que o ID do Pedido sera igual ao do Pagamento

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +46,7 @@ public class ProdutoModel implements Serializable {
 	)
 	Set<CategoriaProdutoModel> categoriaProdutoModelList = new HashSet<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "codigo.produtoModel")
 	private Set<ItemPedidoModel> itemPedidoModelList = new HashSet<>();
 	

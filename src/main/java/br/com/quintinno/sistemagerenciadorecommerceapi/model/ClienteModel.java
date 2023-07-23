@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.quintinno.sistemagerenciadorecommerceapi.enumeration.TipoClienteEnumeration;
@@ -44,6 +46,7 @@ public class ClienteModel implements Serializable {
 	@Column(name = "TIPO_CLIENTE")
 	private Integer codigoTipoClienteEnumeration;
 	
+	@JsonIgnore
 	@JsonManagedReference
 	@OneToMany(mappedBy = "clienteModel", cascade = CascadeType.ALL)
 	private Set<EnderecoModel> enderecoModelList = new HashSet<>();
@@ -53,6 +56,7 @@ public class ClienteModel implements Serializable {
 	@Column(name = "NUMERO_TELEFONE")
 	private Set<String> telefoneList = new HashSet<>();
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "clienteModel")
 	private Set<PedidoModel> pedidoModelList = new HashSet<>();
 	

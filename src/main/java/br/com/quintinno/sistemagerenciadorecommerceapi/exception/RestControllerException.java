@@ -17,7 +17,7 @@ public class RestControllerException {
 
 	@ExceptionHandler(value = NoSuchElementException.class)
 	public ResponseEntity<ExceptionResponseDTO> noSuchElementException(NoSuchElementException noSuchElementException, HttpServletRequest httpServletRequest) {
-		ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO(HttpStatus.NOT_FOUND.name(), 
+		ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO(HttpStatus.NOT_FOUND.name(),
 				noSuchElementException.getMessage(), new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponseDTO);
 	}
