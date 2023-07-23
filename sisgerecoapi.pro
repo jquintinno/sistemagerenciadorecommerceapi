@@ -4,10 +4,12 @@
 
      sudo /opt/lampp/lampp start
      sudo /opt/lampp/lampp stop
+     http://localhost/phpmyadmin/
      
    --- Funcionalidades 
    
-   		- Funcionalidade Gerenciador de Pessoa do Sistema (FUNGERPESSIS)
+   		- Funcionalidade Gerenciador de Pessoas (FUNGERPES)
+   		- Funcionalidade Gerenciador de Produtos (FUNGERPRO)
    		
    --- Demandas
    
@@ -15,4 +17,4 @@
    			- Feature: Implementar configuração de banco de dados MySQL
    
    		- SISGERECO2207202320XXXX
-   			- Feature: Implementar mapeamento Gerenciador de Pessoa do Sistema (FUNGERPESSIS)
+   			- Feature: Implementar mapeamento Gerenciador de Produtos (FUNGERPRO)
