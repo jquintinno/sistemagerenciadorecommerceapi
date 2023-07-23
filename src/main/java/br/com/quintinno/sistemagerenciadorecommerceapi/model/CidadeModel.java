@@ -3,6 +3,8 @@ package br.com.quintinno.sistemagerenciadorecommerceapi.model;
 import java.io.Serial;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class CidadeModel implements Serializable {
 	@Column(name = "NOME")
 	private String nome;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "ID_ESTADO")
 	private EstadoModel estadoModel;

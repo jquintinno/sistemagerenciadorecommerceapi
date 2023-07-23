@@ -9,8 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.CategoriaProdutoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.CidadeModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.ClienteModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.EnderecoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.EstadoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ProdutoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.repository.ClienteRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.EstadoRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.CategoriaProdutoService;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.ProdutoService;
@@ -26,6 +29,9 @@ public class Application implements CommandLineRunner {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -63,7 +69,7 @@ public class Application implements CommandLineRunner {
 			
 			CidadeModel cidadeModel1 = new CidadeModel("Ceilândia", estadoModel1);
 			CidadeModel cidadeModel2 = new CidadeModel("Samambaia", estadoModel1);
-			CidadeModel cidadeModel3 = new CidadeModel("Plano Piloto", estadoModel1);
+			CidadeModel cidadeModel3 = new CidadeModel("Taguatinga", estadoModel1);
 			CidadeModel cidadeModel4 = new CidadeModel("Goiânia", estadoModel2);
 			CidadeModel cidadeModel5 = new CidadeModel("Aparecida de Goiânia", estadoModel2);
 			CidadeModel cidadeModel6 = new CidadeModel("Anápolis", estadoModel2);
@@ -78,6 +84,18 @@ public class Application implements CommandLineRunner {
 			
 				this.estadoRepository.save(estadoModel1);
 				this.estadoRepository.save(estadoModel2);
+				
+			ClienteModel clienteModel1 = new ClienteModel("Mousbler Gowas Sayra Bowou", "mousbler.bowou@hotmail.com.br", "56926210020", 1);
+				clienteModel1.getTelefoneList().add("(61) 3533-9341");
+				clienteModel1.getTelefoneList().add("(61) 99854-8378");
+				
+			EnderecoModel enderecoModel1 = new EnderecoModel("Quadra", "611", "Conjunto 4 Lote 14", "Samamabaia Norte", "72.331-604", clienteModel1, cidadeModel2);
+			EnderecoModel enderecoModel2 = new EnderecoModel("Quadra", "8", "QNL 8 Bloco F", "Taguatinga Norte (Taguatinga)", "72155-816", clienteModel1, cidadeModel3);
+			
+				clienteModel1.getEnderecoModelList().add(enderecoModel1);
+				clienteModel1.getEnderecoModelList().add(enderecoModel2);
+				
+				clienteRepository.save(clienteModel1);
 			
 	}
 

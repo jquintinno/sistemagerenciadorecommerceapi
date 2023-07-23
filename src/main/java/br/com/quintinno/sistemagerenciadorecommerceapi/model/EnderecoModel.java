@@ -3,6 +3,8 @@ package br.com.quintinno.sistemagerenciadorecommerceapi.model;
 import java.io.Serial;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +41,7 @@ public class EnderecoModel implements Serializable {
 	@Column(name = "CEP")
 	private String cep;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_CLIENTE")
 	private ClienteModel clienteModel;
@@ -48,6 +51,16 @@ public class EnderecoModel implements Serializable {
 	private CidadeModel cidadeModel;
 	
 	public EnderecoModel() { }
+
+	public EnderecoModel(String logradouro, String numero, String complemento, String bairro, String cep, ClienteModel clienteModel, CidadeModel cidadeModel) {
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.clienteModel = clienteModel;
+		this.cidadeModel = cidadeModel;
+	}
 
 	public Long getCodigo() {
 		return codigo;

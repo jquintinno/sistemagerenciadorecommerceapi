@@ -5,12 +5,19 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.quintinno.sistemagerenciadorecommerceapi.enumeration.TipoClienteEnumeration;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -38,19 +45,22 @@ public class ClienteModel implements Serializable {
 	@Column(name = "TIPO_CLIENTE")
 	private Integer codigoTipoClienteEnumeration;
 	
-	@OneToMany(mappedBy = "clienteModel")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "clienteModel", cascade = CascadeType.ALL)
 	private Set<EnderecoModel> enderecoModelList = new HashSet<>();
 	
+	@ElementCollection
+	@CollectionTable(name = "TB_TELEFONE", joinColumns = @JoinColumn(name="ID_CLIENTE"))
+	@Column(name = "NUMERO_TELEFONE")
 	private Set<String> telefoneList = new HashSet<>();
 	
 	public ClienteModel() { }
 
-	public ClienteModel(String nome, String email, String cpfCnpj, Integer codigoTipoClienteEnumeration, Set<String> telefoneList) {
+	public ClienteModel(String nome, String email, String cpfCnpj, Integer codigoTipoClienteEnumeration) {
 		this.nome = nome;
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
 		this.codigoTipoClienteEnumeration = codigoTipoClienteEnumeration;
-		this.telefoneList = telefoneList;
 	}
 
 	public Long getCodigo() {

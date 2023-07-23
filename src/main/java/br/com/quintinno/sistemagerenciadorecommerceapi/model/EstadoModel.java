@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +34,7 @@ public class EstadoModel implements Serializable {
 	@Column(name = "SIGLA")
 	private String sigla;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "estadoModel", cascade = CascadeType.ALL)
 	Set<CidadeModel> cidadeModelList = new HashSet<>();
 	
