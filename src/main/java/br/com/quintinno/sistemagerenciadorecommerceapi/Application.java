@@ -1,20 +1,26 @@
 package br.com.quintinno.sistemagerenciadorecommerceapi;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.quintinno.sistemagerenciadorecommerceapi.enumeration.TipoSituacaoPagamentoEnumeration;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.CategoriaProdutoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.CidadeModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ClienteModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.EnderecoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.EstadoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.PagamentoCartaoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.PagamentoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.PedidoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ProdutoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.ClienteRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.EstadoRepository;
+import br.com.quintinno.sistemagerenciadorecommerceapi.repository.PedidoRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.CategoriaProdutoService;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.ProdutoService;
 
@@ -32,6 +38,9 @@ public class Application implements CommandLineRunner {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -96,6 +105,16 @@ public class Application implements CommandLineRunner {
 				clienteModel1.getEnderecoModelList().add(enderecoModel2);
 				
 				clienteRepository.save(clienteModel1);
+				
+			PedidoModel pedidoModel1 = new PedidoModel(LocalDateTime.now(), clienteModel1, enderecoModel1);
+			
+			PagamentoModel pagamentoModel1 = new PagamentoCartaoModel(TipoSituacaoPagamentoEnumeration.PENDENTE, pedidoModel1, 12);
+			
+				pedidoModel1.setPagamentoModel(pagamentoModel1);
+				
+				clienteModel1.getPedidoModelList().add(pedidoModel1);
+				
+				this.pedidoRepository.save(pedidoModel1);
 			
 	}
 

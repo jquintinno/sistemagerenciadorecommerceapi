@@ -10,6 +10,7 @@
    
    		- Funcionalidade Gerenciador de Pessoas (FUNGERPES)
    		- Funcionalidade Gerenciador de Produtos (FUNGERPRO)
+   		- Funcionalidade Gerenciador de Compras (FUNGERCOM)
    		
    --- Demandas
    
@@ -21,6 +22,9 @@
    			
    		- SISGERECO23072023122458
    			- Feature: Implementar mapeamento Gerenciador de Pessoas (FUNGERPES)
+   			
+   		- SISGERECO23072023182948
+   			- Feature: Implementar mapeamento Gerenciador de Compras (FUNGERCOM)
    			
    	--- Tabelas
    	

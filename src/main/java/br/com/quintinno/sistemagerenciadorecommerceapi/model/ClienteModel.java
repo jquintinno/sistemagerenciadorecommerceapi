@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.quintinno.sistemagerenciadorecommerceapi.enumeration.TipoClienteEnumeration;
@@ -53,6 +52,9 @@ public class ClienteModel implements Serializable {
 	@CollectionTable(name = "TB_TELEFONE", joinColumns = @JoinColumn(name="ID_CLIENTE"))
 	@Column(name = "NUMERO_TELEFONE")
 	private Set<String> telefoneList = new HashSet<>();
+	
+	@OneToMany(mappedBy = "clienteModel")
+	private Set<PedidoModel> pedidoModelList = new HashSet<>();
 	
 	public ClienteModel() { }
 
@@ -117,6 +119,18 @@ public class ClienteModel implements Serializable {
 
 	public void setTelefoneList(Set<String> telefoneList) {
 		this.telefoneList = telefoneList;
+	}
+
+	public Set<PedidoModel> getPedidoModelList() {
+		return pedidoModelList;
+	}
+
+	public void setPedidoModelList(Set<PedidoModel> pedidoModelList) {
+		this.pedidoModelList = pedidoModelList;
+	}
+
+	public void setCodigoTipoClienteEnumeration(Integer codigoTipoClienteEnumeration) {
+		this.codigoTipoClienteEnumeration = codigoTipoClienteEnumeration;
 	}
 
 }
