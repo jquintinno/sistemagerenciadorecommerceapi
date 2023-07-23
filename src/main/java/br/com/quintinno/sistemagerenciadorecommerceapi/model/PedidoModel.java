@@ -3,6 +3,8 @@ package br.com.quintinno.sistemagerenciadorecommerceapi.model;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -41,6 +44,9 @@ public class PedidoModel implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ID_ENDENRECO")
 	private EnderecoModel enderecoEntrega;
+	
+	@OneToMany(mappedBy = "codigo.pedidoModel")
+	private Set<ItemPedidoModel> itemPedidoModelList = new HashSet<>();
 	
 	public PedidoModel() { }
 
@@ -88,6 +94,14 @@ public class PedidoModel implements Serializable {
 
 	public void setEnderecoEntrega(EnderecoModel enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public Set<ItemPedidoModel> getItemPedidoModelList() {
+		return itemPedidoModelList;
+	}
+
+	public void setItemPedidoModelList(Set<ItemPedidoModel> itemPedidoModelList) {
+		this.itemPedidoModelList = itemPedidoModelList;
 	}
 
 }

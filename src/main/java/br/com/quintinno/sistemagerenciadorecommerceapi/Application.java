@@ -14,12 +14,14 @@ import br.com.quintinno.sistemagerenciadorecommerceapi.model.CidadeModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ClienteModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.EnderecoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.EstadoModel;
+import br.com.quintinno.sistemagerenciadorecommerceapi.model.ItemPedidoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.PagamentoCartaoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.PagamentoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.PedidoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.model.ProdutoModel;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.ClienteRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.EstadoRepository;
+import br.com.quintinno.sistemagerenciadorecommerceapi.repository.ItemPedidoRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.repository.PedidoRepository;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.CategoriaProdutoService;
 import br.com.quintinno.sistemagerenciadorecommerceapi.service.ProdutoService;
@@ -41,6 +43,9 @@ public class Application implements CommandLineRunner {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -115,6 +120,18 @@ public class Application implements CommandLineRunner {
 				clienteModel1.getPedidoModelList().add(pedidoModel1);
 				
 				this.pedidoRepository.save(pedidoModel1);
+				
+			ItemPedidoModel itemPedidoModel1 = new ItemPedidoModel(pedidoModel1, produtoModel1, BigDecimal.valueOf(0.0), 1, produtoModel1.getPreco().multiply(BigDecimal.valueOf(1)));
+			ItemPedidoModel itemPedidoModel2 = new ItemPedidoModel(pedidoModel1, produtoModel3, BigDecimal.valueOf(0.0), 2, produtoModel3.getPreco().multiply(BigDecimal.valueOf(2)));
+			
+				pedidoModel1.getItemPedidoModelList().add(itemPedidoModel1);
+				pedidoModel1.getItemPedidoModelList().add(itemPedidoModel2);
+				
+				produtoModel1.getItemPedidoModelList().add(itemPedidoModel1);
+				produtoModel3.getItemPedidoModelList().add(itemPedidoModel2);
+				
+				this.itemPedidoRepository.save(itemPedidoModel1);
+				this.itemPedidoRepository.save(itemPedidoModel2);
 			
 	}
 

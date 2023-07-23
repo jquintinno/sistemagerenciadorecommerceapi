@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -44,11 +45,23 @@ public class ProdutoModel implements Serializable {
 	)
 	Set<CategoriaProdutoModel> categoriaProdutoModelList = new HashSet<>();
 	
+	@OneToMany(mappedBy = "codigo.produtoModel")
+	private Set<ItemPedidoModel> itemPedidoModelList = new HashSet<>();
+	
 	public ProdutoModel() { }
 
 	public ProdutoModel(String nome, BigDecimal preco) {
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	// --
+	public Set<PedidoModel> getPedidoList() {
+		Set<PedidoModel> pedidoModelList = new HashSet<>();
+		for (ItemPedidoModel itemPedidoModel : this.itemPedidoModelList) {
+			pedidoModelList.add(itemPedidoModel.getPedidoModel());
+		}
+		return pedidoModelList;
 	}
 
 	public Long getCodigo() {
@@ -81,6 +94,14 @@ public class ProdutoModel implements Serializable {
 
 	public void setCategoriaProdutoModelList(Set<CategoriaProdutoModel> categoriaProdutoModelList) {
 		this.categoriaProdutoModelList = categoriaProdutoModelList;
+	}
+
+	public Set<ItemPedidoModel> getItemPedidoModelList() {
+		return itemPedidoModelList;
+	}
+
+	public void setItemPedidoModelList(Set<ItemPedidoModel> itemPedidoModelList) {
+		this.itemPedidoModelList = itemPedidoModelList;
 	}
 
 }
