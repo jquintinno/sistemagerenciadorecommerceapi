@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -27,9 +28,10 @@ public class CategoriaProdutoModel implements Serializable {
 	@Column(name = "CODIGO")
 	private Long codigo;
 	
-	@Column(name = "NOME")
+	@Column(name = "NOME", unique = true)
 	private String nome;
 	
+	@JsonIgnore
 	@JsonManagedReference // Recuperar as categorias com todos os seus produtos
 	@ManyToMany(mappedBy = "categoriaProdutoModelList")
 	Set<ProdutoModel> produtoModelList = new HashSet<>();

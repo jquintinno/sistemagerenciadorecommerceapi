@@ -2,42 +2,42 @@ package br.com.quintinno.sistemagerenciadorecommerceapi.dto;
 
 public class ExceptionResponseDTO {
 	
-	private String situacaoErro;
+	private String situacao;
 	
-	private String mensagemErro;
+	private String mensagem;
 	
-	private String dataHoraErro;
+	private String dataHora;
 	
 	public ExceptionResponseDTO() { }
 
-	public ExceptionResponseDTO(String codigoSituacaoErro, String mensagemErro, String dataHoraErro) {
-		this.situacaoErro = codigoSituacaoErro;
-		this.mensagemErro = mensagemErro;
-		this.dataHoraErro = dataHoraErro;
+	public ExceptionResponseDTO(String situacao, String mensagem, String dataHora) {
+		this.situacao = situacao;
+		this.mensagem = mensagem;
+		this.dataHora = dataHora;
 	}
 
-	public String getSituacaoErro() {
-		return situacaoErro;
+	public String getSituacao() {
+		return situacao;
 	}
 
-	public void setCodigoSituacaoErro(String situacaoErro) {
-		this.situacaoErro = situacaoErro;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
-	public String getMensagemErro() {
-		return mensagemErro;
+	public String getMensagem() {
+		return mensagem;
 	}
 
-	public void setMensagemErro(String mensagemErro) {
-		this.mensagemErro = mensagemErro;
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
-	public String getDataHoraErro() {
-		return dataHoraErro;
+	public String getDataHora() {
+		return dataHora;
 	}
 
-	public void setDataHoraErro(String dataHoraErro) {
-		this.dataHoraErro = dataHoraErro;
+	public void setDataHora(String dataHora) {
+		this.dataHora = dataHora;
 	}
 
 }
